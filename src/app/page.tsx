@@ -183,7 +183,7 @@ export default function Home() {
               className="filter-button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <span className="filter-icon">🏢</span>
+              <span className="filter-icon"></span>
               {selectedCompany || 'All Companies'}
               <div style={{ marginLeft: 'auto' }}>
                 <span className="dropdown-arrow">{isDropdownOpen ? '▲' : '▼'}</span>
@@ -237,7 +237,7 @@ export default function Home() {
               className="filter-button"
               onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
             >
-              <span className="filter-icon">🏷️</span>
+              <span className="filter-icon"></span>
               {selectedTag || 'All Topics'}
               <div style={{ marginLeft: 'auto' }}>
                 <span className="dropdown-arrow">{isTagDropdownOpen ? '▲' : '▼'}</span>
