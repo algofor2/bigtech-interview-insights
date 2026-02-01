@@ -8,6 +8,9 @@ const shrikhand = Shrikhand({ weight: '400', subsets: ['latin'], variable: '--fo
 export const metadata: Metadata = {
   title: 'Interview-Skills',
   description: 'Master your interviews with style',
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
