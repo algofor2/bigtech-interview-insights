@@ -84,7 +84,7 @@ export function ProblemRow({ problem }: ProblemRowProps) {
                             {isCompleted ? '✓' : ''}
                         </button>
 
-                        <h2 className="row-title" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '400px' }}>
+                        <h2 className="row-title">
                             {problem.title}
                         </h2>
                     </div>

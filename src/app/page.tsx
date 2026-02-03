@@ -120,6 +120,45 @@ export default function Home() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+  // Better Pagination for benim agalar B)
+  const getPaginationNumbers = () => {
+    const pages: (number | string)[] = [];
+    const delta = 2; // Pages to show around current page
+
+    if (totalPages <= 7) {
+      // Show all pages if 7 or fewer
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+
+      // Calculate range around current page
+      let start = Math.max(2, currentPage - delta);
+      let end = Math.min(totalPages - 1, currentPage + delta);
+
+      // Add ellipsis after first page if needed
+      if (start > 2) {
+        pages.push('...');
+      }
+
+      // Add pages around current page
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      // Add ellipsis before last page if needed
+      if (end < totalPages - 1) {
+        pages.push('...');
+      }
+
+      // Always show last page
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
 
   if (isLoading) {
     return (
@@ -336,46 +375,43 @@ export default function Home() {
         }
       </div >
 
-      {/* Pagination */}
+      {/* Pagination Gardasim this is better*/}
       {
         totalPages > 1 && (
           <div className="pagination">
-            <div className="pagination-info">
-              Page {currentPage} of {totalPages}
-            </div>
-
             <div className="pagination-buttons">
               <button
-                className="pagination-btn"
-                onClick={() => goToPage(1)}
-                disabled={currentPage === 1}
-                title="First page"
-              >
-                ≪
-              </button>
-              <button
-                className="pagination-btn"
+                className="pagination-btn pagination-arrow"
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
                 title="Previous page"
               >
                 ‹
               </button>
+              
+              {getPaginationNumbers().map((page, index) => (
+                page === '...' ? (
+                  <span key={`ellipsis-${index}`} className="pagination-ellipsis">
+                    ⋯
+                  </span>
+                ) : (
+                  <button
+                    key={page}
+                    className={`pagination-btn pagination-number ${currentPage === page ? 'active' : ''}`}
+                    onClick={() => goToPage(page as number)}
+                  >
+                    {page}
+                  </button>
+                )
+              ))}
+              
               <button
-                className="pagination-btn"
+                className="pagination-btn pagination-arrow"
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 title="Next page"
               >
                 ›
-              </button>
-              <button
-                className="pagination-btn"
-                onClick={() => goToPage(totalPages)}
-                disabled={currentPage === totalPages}
-                title="Last page"
-              >
-                ≫
               </button>
             </div>
           </div>
